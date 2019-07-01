@@ -5,13 +5,28 @@ const app = express();
 const bodyParser = require('body-parser');
 const urlEncodeParser = bodyParser.urlencoded({extended: false})
 
-// Middleware for static files
-app.use('/images', express.static(path.join(__dirname,'public/images')));
+// [NOTE] Middleware for static files
+app.use(express.static(path.join(__dirname,'public')));
 
-// User form route
+// [NOTE] Member data (hardcoded)
+const members = [
+                    {name: "toby goods", id: 1, status: false},
+                    {name: "daniel corcoran", id:2, status: true},
+                    {name: "sally sun", id: 3, status: false}
+                ]
+
+// [NOTE] Member route, returns json response representing members data
+app.get('/api/member/list', (request, response) => {
+    response.json({
+        members: members
+    })
+})
+
+// [NOTE] User form route
 app.get('/user', (request, response) => {
     let HTML = fs.readFileSync(`${__dirname}/templates/form.html`);
     response.send(`${HTML}`);
+
 })
 
 app.post('/enter-user', urlEncodeParser, (request, response) => {
@@ -22,7 +37,7 @@ app.post('/enter-user', urlEncodeParser, (request, response) => {
 })
 
 
-// How to send html response
+// [NOTE] How to send html response
 app.get('/', (request, response) => {
     response.send(`
     <!DOCTYPE html>
@@ -50,7 +65,7 @@ app.get('/', (request, response) => {
 })
 
 
-// How to send json response
+// [NOTE] How to send json response
 app.get('/api/user', (request, response)=>{
     response.send({
        name: 'George',
@@ -59,7 +74,7 @@ app.get('/api/user', (request, response)=>{
     })
 })
 
-// How to retrieve params and query strings
+// [NOTE] How to retrieve params and query strings
 app.get('/api/user/:id', (request, response) => {
     let id = request.params.id;
     let category = request.query.category;
@@ -71,7 +86,7 @@ app.get('/api/user/:id', (request, response) => {
 
 })
 
-// Conditional port for prod/dev environments
+// [NOTE] Conditional port for prod/dev environments
 
 const PORT = process.env.PORT || 8000
 
