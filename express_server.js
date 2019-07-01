@@ -2,7 +2,7 @@ const express = require('express'); // Express
 const fs = require('fs'); // For file system
 const path = require('path'); // For path joins
 const app = express(); // The app
-const data = require('./data/data'); // Load the data
+const data = require('./public/data/data'); // Load the data
 const uuid = require('uuid'); // Unique id generator
 const handlebars = require('express-handlebars'); // Template engine
 
