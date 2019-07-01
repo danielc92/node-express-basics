@@ -1,0 +1,22 @@
+<section class="section">
+<section class="container">
+    <section class="content">
+        <h2>{{ title }}</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod nulla quisquam, nostrum nam excepturi assumenda, atque rem neque labore minus voluptatem. Libero fugit sint obcaecati repellat qui unde totam corrupti!</p>
+
+        {{#each data}}
+            <div class="notification is-link" style="color:white !important;"> 
+                <h2 class="title">{{this.username}}</h2>
+                <p>{{this.residence}}</p>
+                <ul>
+                    {{#each this.website}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+
+            </div>
+        {{/each}}
+    </section>
+</section>
+</section>
+

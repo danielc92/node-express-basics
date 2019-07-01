@@ -1,12 +1,10 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const app = express();
-const bodyParser = require('body-parser');
-const urlEncodeParser = bodyParser.urlencoded({extended: false})
-const data = require('./data/data');
-const uuid = require('uuid');
-const handlebars = require('express-handlebars');
+const express = require('express'); // Express
+const fs = require('fs'); // For file system
+const path = require('path'); // For path joins
+const app = express(); // The app
+const data = require('./data/data'); // Load the data
+const uuid = require('uuid'); // Unique id generator
+const handlebars = require('express-handlebars'); // Template engine
 
 
 // [NOTE] Creating a basic logger
@@ -39,7 +37,7 @@ app.get('/api/members', (request, response) => {
 
 
 // [NOTE] Member route which accepts POST method
-app.post('/api/members', urlEncodeParser, (request, response) => {
+app.post('/api/members', (request, response) => {
     let member = request.body;
     member['uuid'] = uuid.v4();
     data['data'].push(member);
@@ -62,7 +60,7 @@ app.get('/user', (request, response) => {
 
 })
 
-app.post('/enter-user', urlEncodeParser, (request, response) => {
+app.post('/enter-user', (request, response) => {
     const name = request.body.name;
     const color = request.body.color;
     console.log(name, color);
@@ -70,6 +68,10 @@ app.post('/enter-user', urlEncodeParser, (request, response) => {
 
 
 // [NOTE] How to send html response
+app.get('/', (request, response) => {
+    response.render('index', {"title": "The members list page", "data": data["data"]})
+})
+/*
 app.get('/', (request, response) => {
     response.send(`
     <!DOCTYPE html>
@@ -95,6 +97,7 @@ app.get('/', (request, response) => {
 
     `);
 })
+*/
 
 
 // [NOTE] How to send json response
