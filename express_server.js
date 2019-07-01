@@ -1,13 +1,18 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
-const HTML = fs.readFileSync('./templates/index.html');
+
+
+// Middleware for static files
+app.use('/images', express.static(__dirname + '/public/images'))
 
 
 // How to send html response
 app.get('/', (request, response) => {
-    response.send('<h1>Hello world</h1>');
+    response.send(`<h1>Express Server</h1>
+    <img src="images/cloud-4273197_960_720.png"></img>`);
 })
+
 
 // How to send json response
 app.get('/api/user', (request, response)=>{

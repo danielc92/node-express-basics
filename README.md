@@ -17,6 +17,7 @@ Learning the roots of Nodejs http server. serving basic text/html/json responses
 - Retrieving params (http:localhost:8000/api/users/**id**/)
 - Retrieving query strings (http:localhost:8000/api/users/**?name=harry&school=melbourne**)
 - Hot reloading with nodemon
+- Using middleware to access static files
 
 # Setup
 **How to obtain this repository:**
