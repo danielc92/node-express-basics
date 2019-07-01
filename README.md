@@ -24,6 +24,8 @@ Learning the roots of Nodejs http server. serving basic text/html/json responses
 - Retrieving query strings (http:localhost:8000/api/users/**?name=harry&school=melbourne**)
 - Hot reloading with nodemon
 - Using middleware to access static files
+- Using handlebars rendering template engine
+- Using POST requests, to push JSON data into an existing array.
 
 # Setup
 **How to obtain this repository:**
