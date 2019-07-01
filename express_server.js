@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const urlEncodeParser = bodyParser.urlencoded({extended: false})
 const data = require('./data/data');
 const uuid = require('uuid');
+const handlebars = require('express-handlebars');
 
 
 // [NOTE] Creating a basic logger
@@ -13,6 +14,10 @@ const logger = (request, response, next) => {
     console.log(`${request.protocol}://${request.get('host')}${request.originalUrl} [${new Date().toISOString()}]`)
     next()
 } 
+
+// [NOTE] Handlebars middlewear
+app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars')
 
 // [NOTE] Middleware for json and urlencoded
 app.use(express.json());
@@ -36,7 +41,7 @@ app.get('/api/members', (request, response) => {
 // [NOTE] Member route which accepts POST method
 app.post('/api/members', urlEncodeParser, (request, response) => {
     let member = request.body;
-    console.log(member);
+    member['uuid'] = uuid.v4();
     data['data'].push(member);
 
     response.send(200, {"Message": "Success"})
