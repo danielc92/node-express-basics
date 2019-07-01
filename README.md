@@ -1,6 +1,12 @@
 # Nodejs basic http server.
 Learning the roots of Nodejs http server. serving basic text/html/json responses. This work will be a stepping stone to learn express framework.
 
+# Advantages of using Express.js
+- Fast
+- Can be used for API, microservices, blogs, realtime applications
+- Supports async natively
+- Can be paired with Frontend like React/Angular/Vue, making it possible to use Javascript for front **and** backend.
+
 # Concepts
 
 **NODEJS**
