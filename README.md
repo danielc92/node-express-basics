@@ -4,8 +4,10 @@ What are you building?
 What problem are you trying to solve?
 Who is the project for? Timeframe?
 
-# Before you get started
-Concepts/Software/Programming modules a user may have to read up on before getting started with this project. eg. 'Read about [neural networks](https://towardsdatascience.com/how-to-build-your-own-neural-network-from-scratch-in-python-68998a08e4f6?gi=44b811975215) before getting started.'
+# Concepts covered
+- Creating basic http server
+- Sending text/html/json responses
+- Setting headers/status codes
 
 # Setup
 **How to obtain this repository:**
