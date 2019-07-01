@@ -1,0 +1,16 @@
+{
+  "name": "express-practice",
+  "version": "1.0.0",
+  "description": "Learning the roots of Nodejs http server. serving basic text/html/json responses. This work will be a stepping stone to learn express framework.",
+  "main": "basic_node_server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
