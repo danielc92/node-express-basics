@@ -71,5 +71,8 @@ app.get('/api/user/:id', (request, response) => {
 
 })
 
+// Conditional port for prod/dev environments
 
-app.listen(8000)
+const PORT = process.env.PORT || 8000
+
+app.listen(8000, () => console.log(`Server started on port ${PORT}`))
