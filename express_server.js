@@ -5,12 +5,20 @@ const app = express();
 const bodyParser = require('body-parser');
 const urlEncodeParser = bodyParser.urlencoded({extended: false})
 const data = require('./data/data');
+const uuid = require('uuid');
+
+
 // [NOTE] Creating a basic logger
 const logger = (request, response, next) => {
     console.log(`${request.protocol}://${request.get('host')}${request.originalUrl} [${new Date().toISOString()}]`)
     next()
 } 
 
+// [NOTE] Middleware for json and urlencoded
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
+
+// [NOTE] Use the logger
 app.use(logger);
 
 // [NOTE] Middleware for static files
@@ -24,10 +32,21 @@ app.get('/api/members', (request, response) => {
     })
 })
 
+
+// [NOTE] Member route which accepts POST method
+app.post('/api/members', urlEncodeParser, (request, response) => {
+    let member = request.body;
+    console.log(member);
+    data['data'].push(member);
+
+    response.send(200, {"Message": "Success"})
+})
+
 // [NOTE] This route allows querying by params on job key, using a contains search
 app.get('/api/members/:job', (request, response) => {
     let job = request.params.job;
     let job_search = job.toLowerCase();
+    console.log(data['data'].filter(item => item["job"].toLowerCase().includes(job_search)).length)
     response.json(data['data'].filter(item => item["job"].toLowerCase().includes(job_search)))
 })
 
@@ -42,7 +61,6 @@ app.post('/enter-user', urlEncodeParser, (request, response) => {
     const name = request.body.name;
     const color = request.body.color;
     console.log(name, color);
-    app.removeAllListene
 })
 
 
