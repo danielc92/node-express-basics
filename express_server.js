@@ -4,8 +4,7 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const urlEncodeParser = bodyParser.urlencoded({extended: false})
-
-
+const data = require('./data/data');
 // [NOTE] Creating a basic logger
 const logger = (request, response, next) => {
     console.log(`${request.protocol}://${request.get('host')}${request.originalUrl} [${new Date().toISOString()}]`)
@@ -17,18 +16,19 @@ app.use(logger);
 // [NOTE] Middleware for static files
 app.use(express.static(path.join(__dirname,'public')));
 
-// [NOTE] Member data (hardcoded)
-const members = [
-                    {name: "toby goods", id: 1, status: false},
-                    {name: "daniel corcoran", id:2, status: true},
-                    {name: "sally sun", id: 3, status: false}
-                ]
 
 // [NOTE] Member route, returns json response representing members data
-app.get('/api/member/list', (request, response) => {
+app.get('/api/members', (request, response) => {
     response.json({
-        members: members
+        members: data['data']
     })
+})
+
+// [NOTE] This route allows querying by params on job key, using a contains search
+app.get('/api/members/:job', (request, response) => {
+    let job = request.params.job;
+    let job_search = job.toLowerCase();
+    response.json(data['data'].filter(item => item["job"].toLowerCase().includes(job_search)))
 })
 
 // [NOTE] User form route
@@ -99,4 +99,4 @@ app.get('/api/user/:id', (request, response) => {
 
 const PORT = process.env.PORT || 8000
 
-app.listen(8000, () => console.log(`Server started on port ${PORT}`))
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
