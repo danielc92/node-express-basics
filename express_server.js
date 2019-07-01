@@ -5,6 +5,15 @@ const app = express();
 const bodyParser = require('body-parser');
 const urlEncodeParser = bodyParser.urlencoded({extended: false})
 
+
+// [NOTE] Creating a basic logger
+const logger = (request, response, next) => {
+    console.log(`${request.protocol}://${request.get('host')}${request.originalUrl} [${new Date().toISOString()}]`)
+    next()
+} 
+
+app.use(logger);
+
 // [NOTE] Middleware for static files
 app.use(express.static(path.join(__dirname,'public')));
 
