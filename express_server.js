@@ -1,10 +1,25 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
-
+const bodyParser = require('body-parser');
+const urlEncodeParser = bodyParser.urlencoded({extended: false})
 
 // Middleware for static files
-app.use('/images', express.static(__dirname + '/public/images'))
+app.use('/images', express.static(__dirname + '/public/images'));
+
+
+// User form route
+app.get('/user', (request, response) => {
+    let HTML = fs.readFileSync(`${__dirname}/templates/form.html`);
+    response.send(`${HTML}`);
+})
+
+app.post('/enter-user', urlEncodeParser, (request, response) => {
+    const name = request.body.name;
+    const color = request.body.color;
+    console.log(name, color);
+    app.removeAllListene
+})
 
 
 // How to send html response
