@@ -4,7 +4,7 @@
   "description": "Learning the roots of Nodejs http server. serving basic text/html/json responses. This work will be a stepping stone to learn express framework.",
   "main": "basic_node_server.js",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-handlebars": "^3.1.0",
     "nodemon": "^1.19.1",
     "uuid": "^3.3.2"
